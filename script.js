@@ -15,8 +15,8 @@ renderList();
 form.addEventListener("submit", function (e) {
     e.preventDefault(); // 🚫 отменяет перезагрузку страницы
 
-    const saleful = parseFloat(sale.value) * parseFloat(litrs.value);
-    const finalamont = parseFloat(amount.value) - saleful;
+    const saleful = parseFloat((parseFloat(sale.value) * parseFloat(litrs.value)).toFixed(2));
+    const finalamont = parseFloat((parseFloat(amount.value) - saleful).toFixed(2));
     totalSum += finalamont;
 
     const transaction = {
