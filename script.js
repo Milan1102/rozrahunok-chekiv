@@ -37,9 +37,19 @@ form.addEventListener("submit", function (e) {
 
 function renderList() {
     list.innerHTML = "";
-    transactions.forEach((t) => {
+    transactions.forEach((t, index) => { //index дабаляе індекс до чеку
         const li = document.createElement("li");
         li.textContent = `Сума: ${t.amount} - Літри: ${t.litrs} - Фінальна сума: ${t.finalamont}`;
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "❌"
+        deleteBtn.addEventListener("click", function(){
+            totalSum -= t.finalamont;
+            transactions.splice(index, 1);
+            localStorage.setItem("transactions", JSON.stringify(transactions));
+            localStorage.setItem("totalSum", totalSum.toFixed(2));
+            renderList();
+        });
+        li.appendChild(deleteBtn);
         list.appendChild(li);
     });
 
