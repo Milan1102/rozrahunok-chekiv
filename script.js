@@ -7,6 +7,7 @@ const totalElement = document.getElementById("total-display");
 const operationClerBtn = document.getElementById("operation-clear");
 const totalCleanBtn = document.getElementById("total-clear");
 
+
 let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 let totalSum = parseFloat(localStorage.getItem("totalSum")) || 0;
 
@@ -64,4 +65,44 @@ totalCleanBtn.addEventListener("click", function (){
     totalSum = 0;
     localStorage.removeItem("totalSum");
     renderList();
+});
+const saveMonthBtn = document.getElementById("save-month");
+const monthSelect = document.getElementById("month-select");
+saveMonthBtn.addEventListener("click", function(){
+    const selectedMonth = monthSelect.value;
+    if (!selectedMonth){
+        alert("Будь ласка, виберіть місяць!");
+        return;
+    }
+    //  Получаем текущий список месяцев из хранилища
+    let allMonths = JSON.parse(localStorage.getItem("allMonths")) || {};
+    //добавляэмо або обновляэмо вибраний
+    allMonths[selectedMonth]=totalSum.toFixed(2);
+    //зберігаємо назад
+    localStorage.setItem("allMonths", JSON.stringify(allMonths));
+    alert(`Сума ${totalSum.toFixed(2)} Місяць ${selectedMonth}`);
+
+
+})
+//випливаюче окно збережених даних по місяцях
+const showMonthsBtn = document.getElementById("month-date");
+const savedMonthsDiv = document.getElementById("saved-months");
+showMonthsBtn.addEventListener("click", function(){
+    savedMonthsDiv.classList.toggle("hidden");//включае видимість діву
+    const allMonths = JSON.parse(localStorage.getItem("allMonths")) || {};//загружаємо дані
+    savedMonthsDiv.innerHTML = ""; //очищаємо попередні дані
+    //Якщо нічого не має
+    if (Object.keys(allMonths).length === 0){
+        savedMonthsDiv.textContent = "Немає збережених даних.";
+        return;
+    }
+    const ul = document.createElement("ul");
+    //створення списку
+    for (let month in allMonths){
+        const li = document.createElement("li");
+        li.textContent = `📅 ${month} — 💰 ${allMonths[month]} Kč`;
+        ul.appendChild(li);
+    }
+
+    savedMonthsDiv.appendChild(ul);
 });
