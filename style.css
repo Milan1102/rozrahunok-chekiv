@@ -66,3 +66,13 @@ button:hover {
     text-align: center;
     margin-top: 20px;
 }
+.hidden{
+    display: none;
+}
+#saved-months{ 
+    margin-top: 20px;
+    background: #f8f8f8;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
