@@ -102,6 +102,19 @@ showMonthsBtn.addEventListener("click", function(){
         const li = document.createElement("li");
         li.textContent = `📅 ${month} — 💰 ${allMonths[month]} Kč`;
         ul.appendChild(li);
+        //кнопка видалення
+        const deleteMonthBtn = document.createElement("button");
+        deleteMonthBtn.textContent = "❌";
+        deleteMonthBtn.style.marginLeft = "10px";
+        deleteMonthBtn.addEventListener("click", function(){
+            //видаляемо вибраний місяць
+            delete allMonths[month];
+            localStorage.setItem("allMonths", JSON.stringify(allMonths));
+            //обновляемо вигляд списку
+            showMonthsBtn.click();//посторнонажмаемо для обновлення
+        });
+        li.appendChild(deleteMonthBtn);
+        ul.appendChild(li);
     }
 
     savedMonthsDiv.appendChild(ul);
