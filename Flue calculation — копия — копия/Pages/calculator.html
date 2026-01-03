@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- 🔴 КЛЮЧЕВОЕ: убираем зум -->
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>Розрахунок чеків</title>
+
+  <link rel="stylesheet" href="../Style/style.css">
+
+  <style>
+    /* 🔧 Мобильные фиксы */
+    input, button {
+      font-size: 16px; /* меньше = зум */
+    }
+
+    form {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="../index.html">Головна</a>
+  <a href="calculator.html">Паливо</a>
+  <a href="">DPH</a>
+</header>
+
+<form id="transaction-form">
+  <h1>Розрахунок чеків</h1>
+
+  <label>
+    Знижка (Kč / л):
+    <!-- ❗ НЕ number -->
+    <input type="text"
+           inputmode="decimal"
+           id="sale"
+           value="5"
+           placeholder="Напр. 5">
+  </label>
+
+  <label>
+    Сума (Kč):
+    <input type="text"
+           inputmode="decimal"
+           id="amount"
+           placeholder="Напр. 1500">
+  </label>
+
+  <label>
+    Літри:
+    <input type="text"
+           inputmode="decimal"
+           id="litrs"
+           placeholder="Напр. 40">
+  </label>
+
+  <button type="submit">Додати</button>
+</form>
+
+<h2>Історія операцій</h2>
+<ul id="transaction-list"></ul>
+
+<p id="total-display">Загальна сума: 0.00</p>
+
+<!--
